@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>🏪 Inventaris Toko</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  
+  <!-- FORM INPUT BARANG -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>📝 Tambah Barang Baru</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      
+      <ion-input 
+        label="Nama Barang" 
+        labelPlacement="floating" 
+        fill="outline"
+        placeholder="Contoh: Gula Pasir 1kg"
+        [(ngModel)]="namaBarangBaru">
+      </ion-input>
+      
+      <br>
+      
+      <ion-input 
+        label="Harga (Rp)" 
+        labelPlacement="floating" 
+        fill="outline"
+        type="number"
+        placeholder="Contoh: 15000"
+        [(ngModel)]="hargaBarangBaru">
+      </ion-input>
+      
+      <br>
+      
+      <ion-button 
+        expand="block" 
+        (click)="simpanBarang()"
+        color="success">
+        💾 Simpan Barang
+      </ion-button>
+      
+    </ion-card-content>
+  </ion-card>
+
+  <!-- DAFTAR BARANG -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>📦 Daftar Barang ({{ listBarang.length }} item)</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-list>
+    <ion-item *ngFor="let barang of listBarang">
+      <ion-label>
+        <h2><strong>{{ barang.nama_barang }}</strong></h2>
+        <p style="color: green; font-weight: bold;">
+          {{ formatRupiah(barang.harga) }}
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Pesan jika belum ada barang -->
+  <div *ngIf="listBarang.length === 0" style="text-align: center; margin-top: 20px; color: gray;">
+    <p>Belum ada barang. Silakan tambahkan barang baru!</p>
+  </div>
+
+</ion-content>
